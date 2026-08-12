@@ -1,0 +1,2996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Autonomous Security Guard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, Arial, sans-serif;
+}
+
+body {
+    background: #070b14;
+    color: #e5e7eb;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    height: 72px;
+    background: #0d1321;
+    border-bottom: 1px solid #202938;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #60a5fa;
+}
+
+.logo span {
+    color: white;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav button {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #94a3b8;
+
+    cursor: pointer;
+    font-weight: 700;
+
+    transition: .2s;
+}
+
+.nav button:hover {
+    background: #172033;
+    color: white;
+}
+
+.nav button.active {
+    background: #2563eb;
+    color: white;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 35px 30px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    padding: 65px 20px;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    background: #172554;
+    color: #93c5fd;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.1;
+
+    max-width: 850px;
+    margin: auto;
+}
+
+.hero h1 span {
+    color: #60a5fa;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: 20px auto;
+
+    color: #94a3b8;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    margin-top: 25px;
+}
+
+.hero-buttons button {
+    padding: 13px 25px;
+    margin: 5px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.secondary {
+    background: #1f2937;
+    color: white;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+    margin-bottom: 45px;
+}
+
+.section-title {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: #0d1321;
+    border: 1px solid #202938;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #94a3b8;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   WORKFLOW
+========================================================= */
+
+.workflow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.workflow-step {
+    background: #0d1321;
+    border: 1px solid #202938;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    position: relative;
+}
+
+.workflow-step .number {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: auto auto 10px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    font-weight: 800;
+}
+
+.workflow-step p {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   TECH STACK
+========================================================= */
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tech {
+    padding: 18px;
+
+    background: #0d1321;
+
+    border: 1px solid #202938;
+
+    border-radius: 10px;
+}
+
+.tech strong {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.tech span {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* =========================================================
+   DEMO
+========================================================= */
+
+.demo-title {
+    margin-bottom: 25px;
+}
+
+.demo-title h1 {
+    font-size: 30px;
+}
+
+.demo-title p {
+    color: #94a3b8;
+    margin-top: 7px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #0d1321;
+    border: 1px solid #202938;
+    border-radius: 12px;
+
+    padding: 18px;
+}
+
+.stat-title {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.stat-value {
+    font-size: 27px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 20px;
+}
+
+.demo-card {
+    background: #0d1321;
+    border: 1px solid #202938;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 17px;
+}
+
+/* =========================================================
+   LANES
+========================================================= */
+
+.lanes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.lane {
+    background: #080d17;
+    border: 1px solid #202938;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.lane-header {
+    padding: 10px;
+    background: #111827;
+
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.camera {
+    height: 145px;
+
+    background:
+        linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.7)),
+        url("https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=900&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+}
+
+.camera-scan {
+    position: absolute;
+
+    width: 80%;
+    height: 2px;
+
+    left: 10%;
+    top: 40%;
+
+    background: #22c55e;
+
+    box-shadow: 0 0 12px #22c55e;
+
+    animation: scan 2s infinite;
+}
+
+@keyframes scan {
+
+    0% { top: 20%; }
+
+    50% { top: 80%; }
+
+    100% { top: 20%; }
+
+}
+
+.lane-info {
+    padding: 12px;
+}
+
+.plate {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    background: white;
+    color: #111827;
+
+    border-radius: 4px;
+
+    font-weight: 800;
+    font-size: 11px;
+}
+
+.lane-status {
+    margin-top: 8px;
+
+    font-size: 11px;
+
+    color: #86efac;
+}
+
+/* =========================================================
+   CONVERSATION
+========================================================= */
+
+.conversation {
+    height: 285px;
+
+    overflow-y: auto;
+
+    background: #070b14;
+
+    border-radius: 10px;
+
+    padding: 15px;
+}
+
+.message {
+    max-width: 88%;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.ai {
+    background: #172554;
+
+    border-left: 3px solid #3b82f6;
+}
+
+.visitor {
+    background: #1f2937;
+
+    margin-left: auto;
+}
+
+.owner {
+    background: #064e3b;
+
+    border-left: 3px solid #22c55e;
+}
+
+.system {
+    background: #3f1d1d;
+
+    border-left: 3px solid #ef4444;
+}
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.info {
+    background: #070b14;
+
+    padding: 12px;
+
+    border-radius: 8px;
+}
+
+.info-label {
+    color: #64748b;
+
+    font-size: 10px;
+}
+
+.info-value {
+    margin-top: 4px;
+
+    font-weight: 700;
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    margin: 4px;
+
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.green {
+    background: #16a34a;
+    color: white;
+}
+
+.red {
+    background: #dc2626;
+    color: white;
+}
+
+.blue {
+    background: #2563eb;
+    color: white;
+}
+
+.purple {
+    background: #7c3aed;
+    color: white;
+}
+
+.orange {
+    background: #ea580c;
+    color: white;
+}
+
+.gray {
+    background: #374151;
+    color: white;
+}
+
+/* =========================================================
+   AI LOG
+========================================================= */
+
+.ai-log {
+    height: 300px;
+
+    overflow-y: auto;
+
+    background: #070b14;
+
+    padding: 13px;
+
+    border-radius: 9px;
+
+    font-family: monospace;
+
+    font-size: 12px;
+}
+
+.log-line {
+    margin-bottom: 8px;
+}
+
+.log-time {
+    color: #64748b;
+}
+
+.log-ai {
+    color: #60a5fa;
+}
+
+.log-success {
+    color: #4ade80;
+}
+
+.log-warning {
+    color: #facc15;
+}
+
+.log-danger {
+    color: #f87171;
+}
+
+/* =========================================================
+   GATE
+========================================================= */
+
+.gate {
+    text-align: center;
+}
+
+.gate-icon {
+    font-size: 70px;
+
+    margin: 10px;
+}
+
+.gate-status {
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+.open {
+    color: #4ade80;
+}
+
+.closed {
+    color: #f87171;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.activity {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+
+    border-bottom: 1px solid #202938;
+
+    text-align: left;
+
+    font-size: 12px;
+}
+
+th {
+    color: #64748b;
+}
+
+.allowed {
+    color: #4ade80;
+}
+
+.waiting {
+    color: #facc15;
+}
+
+/* =========================================================
+   DISCLAIMER
+========================================================= */
+
+.disclaimer {
+    margin-top: 30px;
+
+    padding: 18px;
+
+    background: #172554;
+
+    border: 1px solid #1d4ed8;
+
+    border-radius: 10px;
+
+    color: #bfdbfe;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .cards,
+    .tech-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .workflow {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 700px) {
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .cards,
+    .tech-grid,
+    .workflow,
+    .stats,
+    .lanes {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    header {
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="logo">
+        🤖 AI <span>Autonomous Security Guard</span>
+    </div>
+
+
+    <div class="nav">
+
+        <button
+            id="overviewBtn"
+            class="active"
+            onclick="showPage('overview')">
+
+            Overview
+
+        </button>
+
+
+        <button
+            id="demoBtn"
+            onclick="showPage('demo')">
+
+            Live Demo
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     OVERVIEW PAGE
+========================================================= -->
+
+<section id="overview"
+         class="page active">
+
+
+<div class="container">
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <div class="hero-badge">
+
+        AUTONOMOUS SECURITY SYSTEM
+
+    </div>
+
+
+    <h1>
+
+        Security that can
+        <span>see, understand and act.</span>
+
+    </h1>
+
+
+    <p>
+
+        An AI-powered autonomous security guard designed
+        to handle vehicle access, visitor verification,
+        resident communication, deliveries, maintenance
+        personnel and security incidents with minimal
+        human intervention.
+
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <button
+            class="primary"
+            onclick="showPage('demo')">
+
+            ▶ Try Interactive Demo
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="scrollToSection('how')">
+
+            How It Works
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- PROBLEM -->
+
+<div class="section">
+
+    <h2 class="section-title">
+
+        The Problem
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        Traditional gated security depends heavily on
+        guards manually processing vehicles and visitors
+        one at a time. During busy periods, this creates
+        queues, delays and inconsistent verification.
+
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="icon">🚗</div>
+
+            <h3>
+                Traffic Congestion
+            </h3>
+
+            <p>
+
+                Visitors and vehicles can create long queues
+                when every vehicle must be manually checked
+                before entering.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">⏳</div>
+
+            <h3>
+                Slow Verification
+            </h3>
+
+            <p>
+
+                Guards need to manually ask questions,
+                contact residents and record visitor details.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">👤</div>
+
+            <h3>
+                Limited Capacity
+            </h3>
+
+            <p>
+
+                A human guard can only focus on a limited
+                number of vehicles and interactions at once.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- SOLUTION -->
+
+<div class="section">
+
+    <h2 class="section-title">
+
+        The Solution
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        The AI Security Guard acts as an autonomous first
+        layer of security. It observes incoming activity,
+        communicates with people, verifies identities,
+        contacts the appropriate person and controls
+        access based on the situation.
+
+    </p>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="icon">👁️</div>
+
+            <h3>
+                AI Vision
+            </h3>
+
+            <p>
+
+                Detects vehicles and people while identifying
+                license plates, vehicle characteristics and,
+                where appropriate, faces.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🗣️</div>
+
+            <h3>
+                AI Conversation
+            </h3>
+
+            <p>
+
+                Speaks with visitors and collects information
+                such as destination, purpose and expected
+                duration.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🧠</div>
+
+            <h3>
+                Decision Engine
+            </h3>
+
+            <p>
+
+                Determines which workflow should be followed
+                and who needs to approve or handle the request.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- HOW IT WORKS -->
+
+<div class="section"
+     id="how">
+
+    <h2 class="section-title">
+
+        How It Works
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        The system follows a continuous security workflow.
+
+    </p>
+
+
+    <div class="workflow">
+
+
+        <div class="workflow-step">
+
+            <div class="number">1</div>
+
+            <h3>Detect</h3>
+
+            <p>
+
+                Cameras detect incoming vehicles
+                and people.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">2</div>
+
+            <h3>Identify</h3>
+
+            <p>
+
+                License plates, vehicles and
+                identities are analyzed.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">3</div>
+
+            <h3>Understand</h3>
+
+            <p>
+
+                AI communicates with the visitor
+                and understands their purpose.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">4</div>
+
+            <h3>Verify</h3>
+
+            <p>
+
+                Residents or relevant departments
+                are contacted when required.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">5</div>
+
+            <h3>Act</h3>
+
+            <p>
+
+                Access is granted, denied, escalated
+                or monitored.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- USE CASES -->
+
+<div class="section">
+
+    <h2 class="section-title">
+
+        One System. Multiple Security Workflows.
+
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="icon">🏠</div>
+
+            <h3>
+                Residents
+            </h3>
+
+            <p>
+
+                Registered vehicles can be recognized
+                automatically. If a resident arrives in
+                an unregistered vehicle, identity can be
+                verified through additional authentication.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">👤</div>
+
+            <h3>
+                Visitors
+            </h3>
+
+            <p>
+
+                The AI asks for the block, floor, unit,
+                resident, purpose and expected duration,
+                then contacts the resident for approval.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">📦</div>
+
+            <h3>
+                Deliveries
+            </h3>
+
+            <p>
+
+                Delivery personnel can be identified and
+                the destination resident can be notified
+                before access is granted.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🛠️</div>
+
+            <h3>
+                Maintenance
+            </h3>
+
+            <p>
+
+                Maintenance personnel can be classified
+                and routed to the building's maintenance
+                or management department.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🚨</div>
+
+            <h3>
+                Emergencies
+            </h3>
+
+            <p>
+
+                Emergency situations can trigger priority
+                workflows and notify designated personnel.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">⚠️</div>
+
+            <h3>
+                Unknown / Suspicious
+            </h3>
+
+            <p>
+
+                Unknown or failed identities can remain
+                blocked while the system escalates the
+                situation to human security personnel.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- REAL SYSTEM -->
+
+<div class="section">
+
+    <h2 class="section-title">
+
+        Planned Real-World System
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        The interactive website is only a concept demonstration.
+        The actual system is intended to combine hardware,
+        artificial intelligence and access-control technologies.
+
+    </p>
+
+
+    <div class="tech-grid">
+
+
+        <div class="tech">
+
+            <strong>🎥 Computer Vision</strong>
+
+            <span>
+
+                OpenCV, YOLO and camera-based object
+                detection for vehicles and people.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>🔢 ANPR</strong>
+
+            <span>
+
+                Automatic Number Plate Recognition for
+                identifying registered vehicles.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>👤 Face Recognition</strong>
+
+            <span>
+
+                Additional identity verification for
+                situations where a vehicle plate does not match.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>🗣️ Voice AI</strong>
+
+            <span>
+
+                Speech recognition, conversational AI and
+                text-to-speech for natural visitor interaction.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>🧠 AI Decision Engine</strong>
+
+            <span>
+
+                Classifies visitors and determines which
+                verification and notification workflow to use.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>🔐 Access Control</strong>
+
+            <span>
+
+                Integration with gates, barriers and
+                electronic access-control hardware.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>📱 Notifications</strong>
+
+            <span>
+
+                Mobile application, phone calls, SMS or
+                other communication channels for approvals.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>🗄️ Database</strong>
+
+            <span>
+
+                Secure records for residents, vehicles,
+                visitors, permissions and access history.
+
+            </span>
+
+        </div>
+
+
+        <div class="tech">
+
+            <strong>⚡ Backend</strong>
+
+            <span>
+
+                Python-based services such as FastAPI for
+                connecting AI, databases and hardware.
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- SYSTEM PHILOSOPHY -->
+
+<div class="section">
+
+    <h2 class="section-title">
+
+        Not Just an Automated Gate
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        The gate is only one component of the system.
+        The goal is to automate the entire security interaction.
+
+    </p>
+
+
+    <div class="workflow">
+
+
+        <div class="workflow-step">
+
+            <div class="number">01</div>
+
+            <h3>SEE</h3>
+
+            <p>
+
+                Detect vehicles, people and events.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">02</div>
+
+            <h3>TALK</h3>
+
+            <p>
+
+                Communicate naturally with visitors.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">03</div>
+
+            <h3>VERIFY</h3>
+
+            <p>
+
+                Confirm identity and authorization.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">04</div>
+
+            <h3>DECIDE</h3>
+
+            <p>
+
+                Determine the correct security action.
+
+            </p>
+
+        </div>
+
+
+        <div class="workflow-step">
+
+            <div class="number">05</div>
+
+            <h3>ACT</h3>
+
+            <p>
+
+                Open, deny, notify or escalate.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- DISCLAIMER -->
+
+<div class="disclaimer">
+
+<strong>⚠️ Prototype Disclaimer</strong>
+
+<br><br>
+
+This website is a visual and interactive prototype created
+to demonstrate the concept and intended workflow of the
+AI Autonomous Security Guard System.
+
+The vehicle recognition, facial recognition, AI conversation,
+resident notification, access decisions and gate controls
+shown in the demonstration are simulated.
+
+The actual physical system is currently under development
+and will require dedicated cameras, AI models, backend
+infrastructure, communication services and access-control
+hardware.
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DEMO PAGE
+========================================================= -->
+
+<section id="demo"
+         class="page">
+
+
+<div class="container">
+
+
+<div class="demo-title">
+
+    <h1>
+        AI Security Guard — Live Simulation
+    </h1>
+
+    <p>
+        Interactive demonstration of the proposed autonomous
+        security workflow.
+    </p>
+
+</div>
+
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        ACTIVE LANES
+    </div>
+
+    <div class="stat-value">
+        3
+    </div>
+
+</div>
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        VEHICLES PROCESSED
+    </div>
+
+    <div class="stat-value">
+        1,284
+    </div>
+
+</div>
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        ACTIVE INTERACTIONS
+    </div>
+
+    <div class="stat-value">
+        2
+    </div>
+
+</div>
+
+
+<div class="stat">
+
+    <div class="stat-title">
+        SYSTEM STATUS
+    </div>
+
+    <div class="stat-value"
+         style="color:#4ade80">
+
+        ONLINE
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="main-grid">
+
+
+<!-- LEFT -->
+
+<div>
+
+
+<!-- LANES -->
+
+<div class="demo-card">
+
+<div class="card-title">
+
+🚦 Multi-Lane AI Processing
+
+</div>
+
+
+<div class="lanes">
+
+
+<div class="lane">
+
+<div class="lane-header">
+
+LANE 01 • RESIDENT
+
+</div>
+
+
+<div class="camera">
+
+<div class="camera-scan"></div>
+
+</div>
+
+
+<div class="lane-info">
+
+<span class="plate">
+
+WXY 1234
+
+</span>
+
+<div class="lane-status">
+
+✓ Resident recognized
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="lane">
+
+<div class="lane-header">
+
+LANE 02 • VISITOR
+
+</div>
+
+
+<div class="camera">
+
+<div class="camera-scan"></div>
+
+</div>
+
+
+<div class="lane-info">
+
+<span class="plate">
+
+VBC 9081
+
+</span>
+
+<div class="lane-status"
+     style="color:#facc15">
+
+⚠ Verification required
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="lane">
+
+<div class="lane-header">
+
+LANE 03 • DELIVERY
+
+</div>
+
+
+<div class="camera">
+
+<div class="camera-scan"></div>
+
+</div>
+
+
+<div class="lane-info">
+
+<span class="plate">
+
+VDE 2231
+
+</span>
+
+<div class="lane-status">
+
+📦 Delivery detected
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- VISITOR -->
+
+<div class="demo-card">
+
+<div class="card-title">
+
+👤 Current Interaction
+
+</div>
+
+
+<div class="info-grid">
+
+
+<div class="info">
+
+<div class="info-label">
+IDENTITY
+</div>
+
+<div class="info-value">
+Unknown Visitor
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+VEHICLE
+</div>
+
+<div class="info-value">
+Honda Civic
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+DESTINATION
+</div>
+
+<div class="info-value">
+Block B • Floor 12 • B-12-08
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+PURPOSE
+</div>
+
+<div class="info-value">
+Visiting Resident
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+EXPECTED STAY
+</div>
+
+<div class="info-value">
+2 Hours
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+RESIDENT
+</div>
+
+<div class="info-value">
+Daniel Tan
+</div>
+
+</div>
+
+
+</div>
+
+
+<div style="
+margin-top:15px;
+padding:15px;
+background:#111827;
+border-radius:10px;
+text-align:center;
+">
+
+
+<div id="decisionStatus"
+     style="
+     font-size:18px;
+     font-weight:800;
+     color:#facc15;
+     margin-bottom:10px;
+     ">
+
+⏳ WAITING FOR RESIDENT
+
+</div>
+
+
+<button class="green"
+        onclick="approve()">
+
+✓ APPROVE
+
+</button>
+
+
+<button class="red"
+        onclick="deny()">
+
+✕ DENY
+
+</button>
+
+
+<button class="blue"
+        onclick="callOwner()">
+
+📞 CONTACT OWNER
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- CONVERSATION -->
+
+<div class="demo-card">
+
+<div class="card-title">
+
+🗣️ AI Guard Conversation
+
+</div>
+
+
+<div class="conversation"
+     id="conversation">
+
+
+<div class="message ai">
+
+🤖 <strong>AI Guard:</strong><br>
+
+Good afternoon. Welcome. How may I assist you?
+
+</div>
+
+
+<div class="message visitor">
+
+👤 <strong>Visitor:</strong><br>
+
+I'm here to visit Daniel.
+
+</div>
+
+
+<div class="message ai">
+
+🤖 <strong>AI Guard:</strong><br>
+
+Certainly. Which block are you visiting?
+
+</div>
+
+
+<div class="message visitor">
+
+👤 <strong>Visitor:</strong><br>
+
+Block B.
+
+</div>
+
+
+<div class="message ai">
+
+🤖 <strong>AI Guard:</strong><br>
+
+Which floor and unit should I direct you to?
+
+</div>
+
+
+<div class="message visitor">
+
+👤 <strong>Visitor:</strong><br>
+
+Floor 12, unit B-12-08.
+
+</div>
+
+
+<div class="message ai">
+
+🤖 <strong>AI Guard:</strong><br>
+
+What is the purpose of your visit and approximately how long will you be staying?
+
+</div>
+
+
+<div class="message visitor">
+
+👤 <strong>Visitor:</strong><br>
+
+I'm visiting Daniel for about two hours.
+
+</div>
+
+
+<div class="message ai">
+
+🤖 <strong>AI Guard:</strong><br>
+
+Thank you. I am contacting the resident for confirmation. Please wait.
+
+</div>
+
+
+</div>
+
+
+<div style="margin-top:12px">
+
+
+<button class="purple"
+        onclick="visitorScenario()">
+
+👤 Visitor
+
+</button>
+
+
+<button class="orange"
+        onclick="deliveryScenario()">
+
+📦 Delivery
+
+</button>
+
+
+<button class="gray"
+        onclick="maintenanceScenario()">
+
+🛠 Maintenance
+
+</button>
+
+
+<button class="red"
+        onclick="emergencyScenario()">
+
+🚨 Emergency
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- RIGHT -->
+
+<div>
+
+
+<!-- GATE -->
+
+<div class="demo-card gate">
+
+<div class="card-title">
+
+🚧 Smart Gate
+
+</div>
+
+
+<div class="gate-icon"
+     id="gateIcon">
+
+🔴
+
+</div>
+
+
+<div class="gate-status closed"
+     id="gateStatus">
+
+GATE CLOSED
+
+</div>
+
+
+<p style="color:#64748b; margin-top:8px">
+
+Awaiting access decision
+
+</p>
+
+
+<br>
+
+
+<button class="green"
+        onclick="openGate()">
+
+OPEN GATE
+
+</button>
+
+
+<button class="red"
+        onclick="closeGate()">
+
+CLOSE GATE
+
+</button>
+
+</div>
+
+
+
+<!-- AI ENGINE -->
+
+<div class="demo-card">
+
+<div class="card-title">
+
+🧠 AI Decision Engine
+
+</div>
+
+
+<div class="ai-log"
+     id="aiLog">
+
+
+<div class="log-line">
+
+<span class="log-time">
+14:42:08
+</span>
+
+<span class="log-ai">
+AI:
+</span>
+
+Vehicle detected.
+
+</div>
+
+
+<div class="log-line">
+
+<span class="log-time">
+14:42:09
+</span>
+
+<span class="log-ai">
+VISION:
+</span>
+
+License plate WXY 1234 detected.
+
+</div>
+
+
+<div class="log-line">
+
+<span class="log-time">
+14:42:10
+</span>
+
+<span class="log-success">
+MATCH:
+</span>
+
+Registered resident vehicle.
+
+</div>
+
+
+<div class="log-line">
+
+<span class="log-time">
+14:42:11
+</span>
+
+<span class="log-success">
+ACTION:
+</span>
+
+Gate access authorized.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- IDENTITY -->
+
+<div class="demo-card">
+
+<div class="card-title">
+
+🔐 Identity Verification
+
+</div>
+
+
+<div class="info-grid">
+
+
+<div class="info">
+
+<div class="info-label">
+LICENSE PLATE
+</div>
+
+<div class="info-value">
+WXY 1234
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+PLATE MATCH
+</div>
+
+<div class="info-value"
+     style="color:#4ade80">
+
+98.7%
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+FACE MATCH
+</div>
+
+<div class="info-value"
+     style="color:#4ade80">
+
+97.9%
+
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+IDENTITY
+</div>
+
+<div class="info-value">
+Resident
+</div>
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button class="blue"
+        onclick="verifyFace()">
+
+🔍 Simulate Face Verification
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ACTIVITY -->
+
+<div class="demo-card activity">
+
+<div class="card-title">
+
+📋 Security Activity
+
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>TIME</th>
+<th>TYPE</th>
+<th>IDENTITY</th>
+<th>DESTINATION</th>
+<th>ACTION</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="activityTable">
+
+
+<tr>
+
+<td>14:41</td>
+
+<td>🚗 Resident</td>
+
+<td>WXY 1234</td>
+
+<td>Block A</td>
+
+<td class="allowed">
+AUTO ACCESS
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>14:42</td>
+
+<td>👤 Visitor</td>
+
+<td>VBC 9081</td>
+
+<td>B-12-08</td>
+
+<td class="waiting">
+WAITING
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>14:42</td>
+
+<td>📦 Delivery</td>
+
+<td>VDE 2231</td>
+
+<td>A-08-05</td>
+
+<td class="waiting">
+VERIFYING
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="disclaimer">
+
+<strong>⚠️ DEMONSTRATION MODE</strong>
+
+<br><br>
+
+This is a simulated interface demonstrating the intended
+workflow of the AI Autonomous Security Guard System.
+No real cameras, AI models, phone calls, notifications
+or physical gates are connected to this prototype.
+
+The production system is currently under development.
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+
+function showPage(page) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .getElementById("overviewBtn")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("demoBtn")
+        .classList.remove("active");
+
+
+    if(page === "overview") {
+
+        document
+            .getElementById("overviewBtn")
+            .classList.add("active");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+
+    if(page === "demo") {
+
+        document
+            .getElementById("demoBtn")
+            .classList.add("active");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================================================
+   OVERVIEW SCROLL
+========================================================= */
+
+function scrollToSection(id) {
+
+    document
+        .getElementById(id)
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================================================
+   GATE
+========================================================= */
+
+function openGate() {
+
+    document
+        .getElementById("gateIcon")
+        .innerText = "🟢";
+
+
+    const status =
+        document.getElementById("gateStatus");
+
+
+    status.innerText =
+        "GATE OPEN";
+
+
+    status.className =
+        "gate-status open";
+
+
+    logAI(
+        "GATE",
+        "Gate opened by AI decision."
+    );
+
+}
+
+
+function closeGate() {
+
+    document
+        .getElementById("gateIcon")
+        .innerText = "🔴";
+
+
+    const status =
+        document.getElementById("gateStatus");
+
+
+    status.innerText =
+        "GATE CLOSED";
+
+
+    status.className =
+        "gate-status closed";
+
+
+    logAI(
+        "GATE",
+        "Gate closed."
+    );
+
+}
+
+
+/* =========================================================
+   APPROVAL
+========================================================= */
+
+function approve() {
+
+    const status =
+        document.getElementById("decisionStatus");
+
+
+    status.innerText =
+        "✓ ACCESS APPROVED";
+
+
+    status.style.color =
+        "#4ade80";
+
+
+    addMessage(
+        "owner",
+        "📱 <strong>Resident:</strong> Visitor approved. Please allow entry."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Your visit has been approved. Please proceed."
+    );
+
+
+    openGate();
+
+
+    logAI(
+        "ACCESS",
+        "Resident approved visitor access."
+    );
+
+}
+
+
+/* =========================================================
+   DENY
+========================================================= */
+
+function deny() {
+
+    const status =
+        document.getElementById("decisionStatus");
+
+
+    status.innerText =
+        "✕ ACCESS DENIED";
+
+
+    status.style.color =
+        "#f87171";
+
+
+    addMessage(
+        "owner",
+        "📱 <strong>Resident:</strong> Visitor denied."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> I'm sorry, access has been denied."
+    );
+
+
+    closeGate();
+
+
+    logAI(
+        "SECURITY",
+        "Resident denied visitor access."
+    );
+
+}
+
+
+/* =========================================================
+   OWNER CONTACT
+========================================================= */
+
+function callOwner() {
+
+    addMessage(
+        "system",
+        "📞 <strong>SYSTEM:</strong> Contacting Daniel Tan..."
+    );
+
+
+    logAI(
+        "NOTIFICATION",
+        "Resident Daniel Tan contacted."
+    );
+
+
+    setTimeout(() => {
+
+        addMessage(
+            "owner",
+            "📱 <strong>Daniel Tan:</strong> I am reviewing the visitor request."
+        );
+
+    }, 900);
+
+}
+
+
+/* =========================================================
+   VISITOR
+========================================================= */
+
+function visitorScenario() {
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Hello. Who are you here to visit?"
+    );
+
+
+    addMessage(
+        "visitor",
+        "👤 <strong>Visitor:</strong> I'm visiting Daniel."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Which block, floor and unit?"
+    );
+
+
+    addMessage(
+        "visitor",
+        "👤 <strong>Visitor:</strong> Block B, Floor 12, Unit B-12-08."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> What is the purpose of your visit and how long will you stay?"
+    );
+
+
+    logAI(
+        "CLASSIFICATION",
+        "Visitor verification workflow initiated."
+    );
+
+}
+
+
+/* =========================================================
+   DELIVERY
+========================================================= */
+
+function deliveryScenario() {
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Welcome. Are you making a parcel delivery?"
+    );
+
+
+    addMessage(
+        "visitor",
+        "📦 <strong>Delivery:</strong> Yes. Parcel for Block A, Unit A-08-05."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Thank you. I will notify the resident."
+    );
+
+
+    logAI(
+        "DELIVERY",
+        "Resident notified about incoming parcel."
+    );
+
+}
+
+
+/* =========================================================
+   MAINTENANCE
+========================================================= */
+
+function maintenanceScenario() {
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Please identify your maintenance service."
+    );
+
+
+    addMessage(
+        "visitor",
+        "🛠️ <strong>Maintenance:</strong> Swimming pool cleaning."
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Thank you. I will contact the building maintenance department."
+    );
+
+
+    logAI(
+        "MAINTENANCE",
+        "Maintenance department notification initiated."
+    );
+
+}
+
+
+/* =========================================================
+   EMERGENCY
+========================================================= */
+
+function emergencyScenario() {
+
+    addMessage(
+        "system",
+        "🚨 <strong>EMERGENCY DETECTED</strong>"
+    );
+
+
+    addMessage(
+        "ai",
+        "🤖 <strong>AI Guard:</strong> Emergency protocol activated. Please remain at the entrance."
+    );
+
+
+    logAI(
+        "EMERGENCY",
+        "Critical priority event detected."
+    );
+
+
+    logAI(
+        "ALERT",
+        "Security management notification initiated."
+    );
+
+}
+
+
+/* =========================================================
+   FACE VERIFICATION
+========================================================= */
+
+function verifyFace() {
+
+    logAI(
+        "VISION",
+        "Facial recognition analysis started."
+    );
+
+
+    setTimeout(() => {
+
+        logAI(
+            "MATCH",
+            "Face matched registered resident: 97.9%."
+        );
+
+
+        addMessage(
+            "ai",
+            "🤖 <strong>AI Guard:</strong> Identity confirmed. Resident access authorized."
+        );
+
+
+        openGate();
+
+    }, 1000);
+
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+========================================================= */
+
+function addMessage(type, text) {
+
+    const box =
+        document.getElementById("conversation");
+
+
+    const message =
+        document.createElement("div");
+
+
+    message.className =
+        "message " + type;
+
+
+    message.innerHTML =
+        text;
+
+
+    box.appendChild(message);
+
+
+    box.scrollTop =
+        box.scrollHeight;
+
+}
+
+
+/* =========================================================
+   AI LOG
+========================================================= */
+
+function logAI(type, message) {
+
+    const log =
+        document.getElementById("aiLog");
+
+
+    const line =
+        document.createElement("div");
+
+
+    line.className =
+        "log-line";
+
+
+    const time =
+        new Date().toLocaleTimeString();
+
+
+    let className =
+        "log-ai";
+
+
+    if(
+        type === "ACCESS" ||
+        type === "MATCH" ||
+        type === "GATE"
+    ) {
+
+        className =
+            "log-success";
+
+    }
+
+
+    if(
+        type === "SECURITY" ||
+        type === "ALERT" ||
+        type === "EMERGENCY"
+    ) {
+
+        className =
+            "log-danger";
+
+    }
+
+
+    if(
+        type === "NOTIFICATION" ||
+        type === "DELIVERY" ||
+        type === "MAINTENANCE"
+    ) {
+
+        className =
+            "log-warning";
+
+    }
+
+
+    line.innerHTML = `
+
+        <span class="log-time">
+            ${time}
+        </span>
+
+        <span class="${className}">
+            ${type}:
+        </span>
+
+        ${message}
+
+    `;
+
+
+    log.appendChild(line);
+
+
+    log.scrollTop =
+        log.scrollHeight;
+
+}
+
+</script>
+
+
+</body>
+</html>
